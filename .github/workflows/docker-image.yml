@@ -15,4 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag go-zero-base:1.17
+      run: |
+        docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PSW }}
+        docker build . --file Dockerfile --tag zhuzhengqian123/go-zero-base:1.17 --tag latest
+        docker push --all-tags zhuzhengqian123/go-zero-base
